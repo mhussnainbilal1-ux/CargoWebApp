@@ -1,11 +1,16 @@
+
+import { Slider } from "./Slider"
+
 export const Content = () => {
+
     return (
         <>
+        <Slider/>
             <div className="container-fluid">
                 <div className="row column-info block-content">
                     <div className="col-sm-4 col-md-4 col-lg-4 wow fadeInLeft" data-wow-delay="3.3s" style={{
                         visibility: "visible",
-                        animationDelay: "3.3s",
+                        animationDelay: "1.3s",
                         animationName: "fadeInLeft",
                     }}>
                         <img src="media/3-column-info/1.jpg" alt="slider" />
@@ -15,7 +20,7 @@ export const Content = () => {
                     </div>
                     <div className="col-sm-4 col-md-4 col-lg-4 wow fadeInUp" data-wow-delay="3.3s" style={{
                         visibility: "visible",
-                        animationDelay: "3.3s",
+                        animationDelay: "1.3s",
                         animationName: "fadeInUp",
                     }}>
                         <img src="media/3-column-info/2.jpg" alt="Img" />
@@ -25,7 +30,7 @@ export const Content = () => {
                     </div>
                     <div className="col-sm-4 col-md-4 col-lg-4 wow fadeInRight" data-wow-delay="3.3s" style={{
                         visibility: "visible",
-                        animationDelay: "3.3s",
+                        animationDelay: "1.3s",
                         animationName: "fadeInRight",
                     }}>
                         <img src="media/3-column-info/3.jpg" alt="Img" />
@@ -46,7 +51,7 @@ export const Content = () => {
                     <h2>WE PROVIDE FASTEST &amp; AFFORDABLE CARGO SERVICES</h2>
                     <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt</p>
                 </div>
-                <div><a className="btn btn-success btn-lg" href="#">REQUEST A FREE QUOTE</a></div>
+                <div><a className="btn btn-success btn-lg" href="/quote">REQUEST A FREE QUOTE</a></div>
             </div>
 
 

@@ -21,7 +21,7 @@ export const Footer=()=>{
 	                            <a href="#"><i className="fa fa-pinterest-square fa-2x"></i></a>
 	                            <a href="#"><i className="fa fa-vimeo-square fa-2x"></i></a>
 	                        </div>
-	                        <a href="#" className="btn btn-lg btn-danger">GET A FREE QUOTE</a>
+	                        <a href="/quote" className="btn btn-lg btn-danger">GET A FREE QUOTE</a>
 	                    </div>
 	                    <div className="col-sm-2 wow zoomIn" data-wow-delay="0.3s" 
                         style={{

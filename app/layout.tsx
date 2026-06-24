@@ -28,6 +28,7 @@ export default function RootLayout({ children }: any) {
 
       <body data-scrolling-animations="true">
         <Header />
+        
         {children}
         <Toaster position="top-right" />
         <Footer />

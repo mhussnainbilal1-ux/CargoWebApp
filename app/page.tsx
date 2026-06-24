@@ -5,7 +5,6 @@ import { Content } from "./component/home/Content";
 export default function Home() {
   return (
     <>
-    <Slider/>
     <Content/>
     </>
   
