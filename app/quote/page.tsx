@@ -7,83 +7,11 @@ export default function Quote() {
     const [progress, setProgress] = useState(0);
     const [errors, setErrors] = useState("");
 
-    const validateForm = (form: any) => {
-        let newErrors: string = "";
-
-        const name = form["user-name"].value.trim();
-        const email = form["user-email"].value.trim();
-        const phone = form["user-phone"].value.trim();
-        const message = form["user-message"].value.trim();
-
-        if (!name) newErrors = "Name is required";
-
-        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-        if (!email || !emailRegex.test(email)) newErrors = "Email is required";
-
-        if (phone && phone.length < 7) newErrors = "Phone number is not correct";
-
-        if (!phone) newErrors = "Phone is required";
-
-        if (!message) newErrors = "Message is required";
-
-        setErrors(newErrors);
-
-        return Object.keys(newErrors).length === 0;
-    };
-
-    const handleSubmit = async (e: any) => {
-        e.preventDefault();
-
-        const form = e.target;
-
-        // ✅ validation only
-        if (!validateForm(form)) return;
-
-        setLoading(true);
-        setProgress(10);
-
-        const interval = setInterval(() => {
-            setProgress((prev) => {
-                if (prev < 80) return prev + 10;
-                return prev;
-            });
-        }, 200);
-
-        try {
-            await emailjs.send(
-                "service_g6681ty",
-                "template_ty2tzrc",
-                {
-                    firstName: form["user-name"].value,
-                    lastName: form["user-lastname"].value,
-                    email: form["user-email"].value,
-                    phone: form["user-phone"].value,
-                    subject: form["user-subject"].value,
-                    message: form["user-message"].value,
-                },
-                "c4V7U_p68TYPVEWoU"
-            );
-
-            clearInterval(interval);
-            setProgress(100);
-            toast.success("Message sent successfully!");
-            setTimeout(() => {
-                form.reset();
-                setLoading(false);
-                setProgress(0);
-                setErrors("");
-            }, 400);
-
-        } catch (error) {
-            clearInterval(interval);
-            console.log(error);
-            setLoading(false);
-            setProgress(0);
-        }
-    };
-
     return (
         <>
+
+
+
             <div className="bg-image page-title">
                 <div className="container-fluid">
                     <a href="#">
@@ -101,15 +29,60 @@ export default function Quote() {
             </div>
 
             <div className="container-fluid block-content">
-                <div className="row main-grid">
+                <div className="row main-grid"> <div className="col-sm-12 wow fadeInRight">
+                <h4>Get a quote online
+                        </h4>
+                        <div className="row form-elem" style={{
+                            backgroundColor: "#a91605",
+                            marginRight: "0px",
+                            marginLeft: "0px",
+                            borderRadius: "8px",
+                            padding: "20px 12px 20px 12px"
+                        }}>
+                            <div className="col-sm-12 form-elem">
 
 
+                            </div>
+                            {/* LEFT SIDE */}
+                            <div className="col-sm-12 col-md-3 form-elem">
 
-                    <div className="col-sm-12 wow fadeInRight">
-                        <h4>GET A FREE QUOTE</h4>
+                                <div className="default-inp form-elem">
+                                    <i className="fa fa-location-arrow"></i>
+                                    <input type="text" name="user-name" placeholder="Pickup" />
+                                </div>
+                            </div>
+                            <div className="col-sm-12 col-md-3 form-elem">
 
+                                <div className="default-inp form-elem">
+                                    <i className="fa fa-map-marker"></i>
+                                    <input type="text" name="user-name" placeholder="Destination" />
+                                </div>
+                            </div>
+                            <div className="col-sm-12 col-md-4 form-elem">
+
+                                <div className="default-inp form-elem">
+                                    <i className="fa fa-envelope"></i>
+                                    <input type="text" name="user-name" placeholder="Email" />
+                                </div>
+                            </div>
+                            <div className="col-sm-12 col-md-2 form-elem">
+
+                                <div className="form-elem">
+                                <button style={{width:"100%"}}
+                                    type="submit"
+                                    className="btn btn-success btn-default"
+                                    disabled={loading}
+                                >
+                                    {loading ? "Submitting..." : "Get a Quote"}
+                                </button>
+                                </div>
+                            </div>
+                        </div>
+<br/><br/><br/>
+                        <h4>Can’t find what your looking for? Please use the form below to contact us.
+                        </h4>
                         <p>
-                            Integer congue elit noin semper laoreet sed lectus orcil posuer nisal tempor se felis acm.
+                            Please note, by using our contact form you are automatically opting in to be contacted via email.
                         </p>
                         <p style={{ color: "red" }}>
                             {errors}
@@ -135,92 +108,99 @@ export default function Quote() {
                             </div>
                         )}
 
-                        <form onSubmit={handleSubmit} id="contactForm" className="reply-form form-inline" noValidate>
+                        <form id="contactForm" className="reply-form form-inline" noValidate>
 
                             <div className="row form-elem">
+                                <br />
+                                <div className="col-sm-12 form-elem">
 
+                                    <u><h4>Your Detail</h4></u>
+                                </div>
+                                {/* LEFT SIDE */}
                                 <div className="col-sm-6 form-elem">
+
                                     <div className="default-inp form-elem">
                                         <i className="fa fa-user"></i>
-                                        <input type="text" name="full_name" placeholder="Full Name *" />
+                                        <input type="text" name="user-name" placeholder="First Name" />
+                                    </div>
+                                    <div className="default-inp form-elem">
+                                        <i className="fa fa-user"></i>
+                                        <input type="text" name="user-lastname" placeholder="Last Name" />
                                     </div>
 
-                                    <div className="default-inp form-elem">
-                                        <i className="fa fa-building"></i>
-                                        <input type="text" name="company_name" placeholder="Company Name" />
-                                    </div>
+
+                                </div>
+
+                                {/* RIGHT SIDE */}
+                                <div className="col-sm-6 form-elem">
 
                                     <div className="default-inp form-elem">
                                         <i className="fa fa-envelope"></i>
-                                        <input type="email" name="email" placeholder="Email Address *" />
+                                        <input type="text" name="user-email" placeholder="Email Address" />
                                     </div>
-
                                     <div className="default-inp form-elem">
                                         <i className="fa fa-phone"></i>
-                                        <input type="text" name="phone" placeholder="Phone Number *" />
-                                    </div>
-                                </div>
-
-                                <div className="col-sm-6 form-elem">
-                                    <div className="default-inp form-elem" style={{height:"52px"}}>
-                                        <i className="fa fa-truck"></i>
-                                        <select name="shipment_type" style={{height:"52px", width:"100%", border:"0.5px solid grey"}}>
-                                            <option value="">Shipment Type *</option>
-                                            <option value="Road Freight">Road Freight</option>
-                                            <option value="Air Freight">Air Freight</option>
-                                            <option value="Sea Freight">Sea Freight</option>
-                                            <option value="Warehousing">Warehousing</option>
-                                            <option value="Express Delivery">Express Delivery</option>
-                                        </select>
-                                    </div>
-
-                                    <div className="default-inp form-elem">
-                                        <i className="fa fa-map-marker"></i>
-                                        <input type="text" name="pickup_location" placeholder="Pickup Location *" />
-                                    </div>
-
-                                    <div className="default-inp form-elem">
-                                        <i className="fa fa-map-marker"></i>
-                                        <input type="text" name="delivery_location" placeholder="Delivery Location *" />
-                                    </div>
-
-                                    <div className="default-inp form-elem">
-                                        <i className="fa fa-cubes"></i>
-                                        <input type="text" name="cargo_type" placeholder="Cargo Type" />
+                                        <input type="text" name="user-phone" placeholder="Phone No." />
                                     </div>
                                 </div>
                             </div>
 
                             <div className="row form-elem">
-                                <div className="col-sm-6 form-elem">
+                                <br />
+                                <div className="col-sm-12 form-elem">
+                                    <u><h4>Collection Address</h4></u>
+                                </div>
+                                <div className="col-sm-12 form-elem">
+
                                     <div className="default-inp form-elem">
-                                        <i className="fa fa-balance-scale"></i>
-                                        <input type="text" name="weight" placeholder="Weight (kg)" />
+                                        <i className="fa fa-building"></i>
+                                        <input type="text" name="user-name" placeholder="Building Name/Number" />
+                                    </div>
+                                    <div className="default-inp form-elem">
+                                        <i className="fa fa-map-marker"></i>
+                                        <input type="text" name="user-lastname" placeholder="Postcode" />
+                                    </div>
+                                    <div className="form-elem default-inp ">
+                                        <textarea
+                                            name="message"
+                                            placeholder="Further Instructions"
+                                        ></textarea>
                                     </div>
                                 </div>
+                            </div>
+                            {/* CONTACT SECTION */}
+                            <div className="row form-elem">
+                                <br />
+                                <div className="col-sm-12 form-elem">
+                                    <u> <h4>Delivery Address</h4></u>
+                                </div>
+                                <div className="col-sm-12 form-elem">
 
-                                <div className="col-sm-6 form-elem">
                                     <div className="default-inp form-elem">
-                                        <i className="fa fa-calendar"></i>
-                                        <input type="date" name="shipment_date" />
+                                        <i className="fa fa-building"></i>
+                                        <input type="text" name="user-name" placeholder="Building Name/Number" />
+                                    </div>
+                                    <div className="default-inp form-elem">
+                                        <i className="fa fa-map-marker"></i>
+                                        <input type="text" name="user-lastname" placeholder="Postcode" />
+                                    </div>
+                                    <div className="form-elem default-inp">
+                                        <textarea
+                                            name="message"
+                                            placeholder="Further Instructions"
+                                        ></textarea>
                                     </div>
                                 </div>
                             </div>
 
-                            <div className="form-elem default-inp">
-                                <textarea
-                                    name="message"
-                                    placeholder="Additional Details / Special Instructions"
-                                ></textarea>
-                            </div>
-
+                            {/* SUBMIT */}
                             <div className="form-elem">
                                 <button
                                     type="submit"
                                     className="btn btn-success btn-default"
                                     disabled={loading}
                                 >
-                                    {loading ? "Sending..." : "Get a Quote"}
+                                    {loading ? "Submitting..." : "Get Quote"}
                                 </button>
                             </div>
 
@@ -229,6 +209,72 @@ export default function Quote() {
                     </div>
                 </div>
             </div>
+            <br />
+            <br />
+            <div className="block-content inner-offset" style={{marginBottom:"-50px"}}>
+            <div
+                className="big-hr color-2 wow zoomInUp"
+                data-wow-delay="0.3s"
+                style={{
+                    visibility: "visible",
+                    animationDelay: "0.3s",
+                    animationName: "zoomInUp",
+                }}
+            >
+                <div
+                    className="text-left"
+                    style={{ marginRight: "40px" }}
+                >
+                    <h2>WE PROVIDE FASTEST &amp; AFFORDABLE CARGO SERVICES</h2>
+                    <p>
+                        Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+                        tempor incididunt
+                    </p>
+                </div>
+
+                {/* <div>
+                    <a className="btn btn-danger btn-lg" href="#">
+                        REQUEST A FREE QUOTE
+                    </a>
+                </div> */}
+            </div>
+  <div
+    className="info-texts wow fadeIn"
+    data-wow-delay="0.3s"
+    style={{
+      visibility: "visible",
+      animationDelay: "0.3s",
+      animationName: "fadeIn",
+    }}
+  >
+    <div className="container-fluid">
+      <div className="row">
+        <div className="col-sm-4 col-md-4 col-lg-4">
+          <p>
+            We have wide network of offices in all major locations to help you
+            with the services we offer
+          </p>
+        </div>
+
+        <div className="col-sm-4 col-md-4 col-lg-4">
+          <p>
+            With the help of our worldwide partners we are providing
+            specialized services in Logistics solutions to our satisfied
+            customers
+          </p>
+        </div>
+
+        <div className="col-sm-4 col-md-4 col-lg-4">
+          <p>
+            We provides comprehensive cargo care, cargo movement &amp; project
+            management
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+          
         </>
     );
 };
