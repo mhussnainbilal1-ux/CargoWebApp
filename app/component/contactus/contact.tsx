@@ -65,7 +65,7 @@ export const Contact = () => {
                     firstName: formData.get("user-name"),
                     lastName: formData.get("user-lastname"),
                     email: formData.get("user-email"),
-                    phone: formData.get("user-phone"),
+                    contact: formData.get("user-phone"),
                     subject: formData.get("user-subject"),
                     message: formData.get("user-message"),
                 },

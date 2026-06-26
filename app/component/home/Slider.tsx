@@ -10,11 +10,11 @@ export const Slider = () => {
   const slides = [
     {
       image: "/media/main-slider/1.jpg",
-      title: "LARGE NUMBER OF FREIGHT WAYS MAKES US POWERFUL",
+      title: "Same Day Courier & Van Logistics UK | Broad Peak Group Ltd",
     },
     {
       image: "/media/main-slider/2.jpg",
-      title: "LARGE NUMBER OF FREIGHT WAYS MAKES US POWERFUL",
+      title: "Same Day Courier & Van Logistics UK | Broad Peak Group Ltd",
     },
   ];
 
@@ -38,7 +38,7 @@ export const Slider = () => {
               style={{ backgroundImage: `url(${slide.image})` }}
             >
               <div className="container-fluid">
-                <div className="slider-content col-md-6 col-lg-6">
+                <div className="slider-content col-md-7 col-lg-7">
                   
                   <div style={{ display: "table" }}>
                     
@@ -64,12 +64,10 @@ export const Slider = () => {
                   </div>
 
                   <p>
-                    Nunc accumsan metus quis metus. Sed luctus. Mauris eu enim
-                    quisque dignissim nequesudm consectetuer dapibus wn eu leo
-                    integer varius erat.
+                  Reliable Same Day Courier & Van Logistics Across the UK
                     <br />
-                    <a className="btn btn-success" href="#">
-                      LEARN MORE
+                    <a className="btn btn-success" href="/quote">
+                      Get a Quote
                     </a>
                   </p>
 
