@@ -6,40 +6,33 @@ import Swal from "sweetalert2";
 export default function Quote() {
     const [loading, setLoading] = useState(false);
     const [progress, setProgress] = useState(0);
-    const [errors1, setErrors1] = useState("");
-    const [errors, setErrors] = useState("");
     
-    const [success, setSuccess]= useState(false);
-    const [form1Data, setForm1Data] = useState({
-        pickup: "",
-        destination: "",
-        email: "",
-      });
+    const [errors, setErrors] = useState("");
+    const [suggestions, setSuggestions] = useState<string[]>([]);
 
-      const [form2Data, setForm2Data] = useState({
-        firstName: "",
-        lastName: "",
-        email: "",
-        contact:"",
-        collectionAddress: "",
+    const [delPostcode, setDelPostcode] = useState<string[]>([]);
+
+      const [formData, setFormData] = useState({
+        fullName: "",
+        companyName: "",
+        phoneNumber: "",
+        emailAddress:"",
         collectionPostCode: "",
-        collectionInstructions: "",
-        deliveryAddress: "",
         deliveryPostCode: "",
-        deliveryInstructions: "",
+        collectionDate:"",
+        collectionTime:"",
+        deliveryDate:"",
+        deliveryTime:"",
+        itemDescription:"",
+        approxSize:"",
+        approxWeight:"",
+        vehicleRequired:"",
+        additionalNotes: "",
       });
 
-    const handleChange1 = (e: React.ChangeEvent<HTMLInputElement>) => {
-        setErrors1("")
-        setForm1Data((prev) => ({
-          ...prev,
-          [e.target.name]: e.target.value,
-        }));
-      };
-
-      const handleChange2 = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-       
-        setForm2Data((prev) => ({
+      const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+       setErrors("")
+        setFormData((prev) => ({
           ...prev,
           [e.target.name]: e.target.value,
         }));
@@ -47,111 +40,104 @@ export default function Quote() {
     
      
     
-    const handleSubmit1 = async (
+   const getSuggestions = async (query: string) => {
+  if (query.length < 2) return [];
+
+  const res = await fetch(
+    `https://api.postcodes.io/postcodes/${encodeURIComponent(query)}/autocomplete`
+  );
+
+  const data = await res.json();
+
+  return data.result || [];
+};
+
+const handlePostcodeChange = async (
+    e: React.ChangeEvent<HTMLInputElement>
+  ) => {
+    handleChange(e); // your existing function
+  
+    const value = e.target.value;
+    if (value.length < 2) {
+      setSuggestions([]);
+      return;
+    }
+  
+    const results = await getSuggestions(value);
+    setSuggestions(results);
+  };
+
+  const handleDelPostcodeChange = async (
+    e: React.ChangeEvent<HTMLInputElement>
+  ) => {
+    handleChange(e); // your existing function
+  
+    const value = e.target.value;
+    if (value.length < 2) {
+        setDelPostcode([]);
+      return;
+    }
+  
+    const results = await getSuggestions(value);
+    setDelPostcode(results);
+  };
+
+
+    const handleSubmit = async (
         e: React.FormEvent<HTMLFormElement>
     ) => {
         e.preventDefault();
     
-        const form = e.currentTarget;
-        if (!form1Data.pickup || !form1Data.destination || !form1Data.email) {
-            setErrors1("* Pickup, destination and email are required");
+        const { 
+        fullName,
+        companyName,
+        phoneNumber,
+        emailAddress,
+        collectionPostCode,
+        deliveryPostCode,
+        collectionDate,
+        collectionTime,
+        deliveryDate,
+        deliveryTime,
+        itemDescription,
+        approxSize,
+        approxWeight,
+        vehicleRequired,
+        additionalNotes,
+         } = formData;
+        if (!fullName) {
+            setErrors("Full name is required");
             return;
-        }
-    
-        setLoading(true);
-        setProgress(10);
-    
-        const interval = setInterval(() => {
-            setProgress((prev) => {
-                if (prev < 80) return prev + 10;
-                return prev;
-            });
-        }, 200);
-    
-        try {
-            await emailjs.send(
-                "service_g6681ty",
-                "template_7us4o2l",
-                {
-                    pickup:form1Data.pickup,
-                    destination: form1Data.destination,
-                    email: form1Data.email,
-                },
-                "c4V7U_p68TYPVEWoU"
-            );
-    
-            clearInterval(interval);
-            setProgress(100);
-    
-            toast.success("Message sent successfully!");
-            Swal.fire({
-                icon: "success",
-                title: "Request Submitted!",
-                text: "Thank you! We've received your enquiry and will contact you shortly.",
-                confirmButtonText: "OK",
-                confirmButtonColor: "#16a34a",
-                background: "#fff",
-              });
-            setForm1Data({
-                pickup: "",
-                destination: "",
-                email: "",
-              })
-            setTimeout(() => {
-                form.reset();
-                setErrors("");
-                setLoading(false);
-                setProgress(0);
-            }, 400);
-    
-        } catch (error) {
-            clearInterval(interval);
-            console.error(error);
-    
-            toast.error("Failed to send message");
-            
-            setLoading(false);
-            setProgress(0);
-        }
-    };
-
-
-    const handleSubmit2 = async (
-        e: React.FormEvent<HTMLFormElement>
-    ) => {
-        e.preventDefault();
-    
-        const { firstName, lastName, email,
-             contact, collectionAddress, collectionPostCode, collectionInstructions
-            , deliveryAddress, deliveryPostCode, deliveryInstructions } = form2Data;
-        if (!firstName) {
-            setErrors("First name is required");
-            return;
-        }else if (!lastName) {
-            setErrors("Last name is required"); return;
-        } else if (!email) {
+        }else if (!companyName) {
+            setErrors("Company name is required"); return;
+        } else if (!emailAddress) {
             setErrors( "Email is required"); return;
-        } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+        } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(emailAddress)) {
             setErrors("Please enter a valid email"); return;
-        } else if (!contact) {
+        } else if (!phoneNumber) {
             setErrors("Phone is required"); return;
-        } else if (contact.length < 7) {
+        } else if (phoneNumber.length < 7) {
             setErrors("Phone number is not correct"); return;
-        } else if (!collectionAddress) {
-            setErrors("Collection address is required"); return;
-
-        } else if (!collectionPostCode) {
+        } else if (!collectionDate) {
+            setErrors("Collection date is required"); return;
+        } else if (!collectionTime) {
+            setErrors("Collection time is required"); return;
+        } else if (!deliveryDate) {
+            setErrors("Delivery date is required"); return;
+        }
+        else if (!itemDescription) {
+            setErrors("Item description is required"); return;
+        }
+        else if (!approxSize) {
+            setErrors("Size is required"); return;
+        }
+        else if (!approxWeight) {
+            setErrors("Weight is required"); return;
+        }
+        else if (!collectionPostCode) {
             setErrors("Collection postCode is required"); return;
-        } else if (!collectionInstructions) {
-            setErrors("Collection instructions are required"); return;
-
-        }else if (!deliveryAddress) {
-            setErrors("Delivery address is required"); return;
-        } else if (!deliveryPostCode) {
-            setErrors("Delivery postCode is required"); return;
-       
-        } else if (!deliveryInstructions) {
-            setErrors("Delivery instructions are required"); return;
+        } else if (!vehicleRequired) {
+            setErrors("Vehicle required is required"); return;
         }
     
         setLoading(true);
@@ -169,9 +155,21 @@ export default function Quote() {
                 "service_g6681ty",
                 "template_ty2tzrc",
                 {
-                    firstName, lastName, email, contact,
-                    collectionAddress, collectionPostCode, collectionInstructions,
-                    deliveryAddress, deliveryPostCode, deliveryInstructions
+                    fullName,
+                    companyName,
+                    phoneNumber,
+                    emailAddress,
+                    collectionPostCode,
+                    deliveryPostCode,
+                    collectionDate,
+                    collectionTime,
+                    deliveryDate,
+                    deliveryTime,
+                    itemDescription,
+                    approxSize,
+                    approxWeight,
+                    vehicleRequired,
+                    additionalNotes,
                 },
                 "c4V7U_p68TYPVEWoU"
             );
@@ -188,23 +186,24 @@ export default function Quote() {
                 confirmButtonColor: "#16a34a",
                 background: "#fff",
               });
-            setForm1Data({
-                pickup: "",
-                destination: "",
-                email: "",
-              })
+
             setTimeout(() => {
-                setForm2Data({
-                    firstName: "",
-                    lastName: "",
-                    email: "",
-                    contact:"",
-                    collectionAddress: "",
+                setFormData({
+                    fullName: "",
+                    companyName: "",
+                    phoneNumber: "",
+                    emailAddress:"",
                     collectionPostCode: "",
-                    collectionInstructions: "",
-                    deliveryAddress: "",
                     deliveryPostCode: "",
-                    deliveryInstructions: "",
+                    collectionDate:"",
+                    collectionTime:"",
+                    deliveryDate:"",
+                    deliveryTime:"",
+                    itemDescription:"",
+                    approxSize:"",
+                    approxWeight:"",
+                    vehicleRequired:"",
+                    additionalNotes: "",
                   })
                 setErrors("");
                 setLoading(false);
@@ -244,76 +243,7 @@ export default function Quote() {
 
             <div className="container-fluid block-content">
                 <div className="row main-grid"> <div className="col-sm-12 wow fadeInRight">
-                <h4>Get a quote online
-                        </h4>
-                        <div className="row form-elem" style={{
-                            backgroundColor: "#a91605",
-                            marginRight: "0px",
-                            marginLeft: "0px",
-                            borderRadius: "8px",
-                            padding: "10px 12px 20px 12px"
-                        }}>
-                             <form onSubmit={handleSubmit1}>
-                            <div className="col-sm-12 form-elem">
-
-
-                            </div>
-                            {/* LEFT SIDE */}
-                           
-                            <div className="col-sm-12 col-md-3 form-elem">
-
-                                <div className="default-inp form-elem">
-                                    <i className="fa fa-location-arrow"></i>
-                                    <input type="text" name="pickup" placeholder="Pickup"
-                                    value={form1Data.pickup}
-                                    onChange={handleChange1}
-                                     />
-                                </div>
-                            </div>
-                            <div className="col-sm-12 col-md-3 form-elem">
-
-                                <div className="default-inp form-elem">
-                                    <i className="fa fa-map-marker"></i>
-                                    <input type="text" 
-                                    value={form1Data.destination}
-                                    onChange={handleChange1}
-                                     name="destination" placeholder="Destination" />
-                                </div>
-                            </div>
-                            <div className="col-sm-12 col-md-4 form-elem">
-
-                                <div className="default-inp form-elem">
-                                    <i className="fa fa-envelope"></i>
-                                    <input type="text" name="email" placeholder="Email"  value={form1Data.email}
-                                    onChange={handleChange1}
-                                    />
-                                </div>
-                            </div>
-                            <div className="col-sm-12 col-md-2 form-elem">
-                            
-                                <div className="form-elem">
-                                <button style={{width:"100%"}}
-                                    type="submit"
-                                    className="btn btn-success btn-default"
-                                    disabled={loading}
-                                >
-                                    {loading ? "Submitting..." : "Get a Quote"}
-                                </button>
-                                
-                                </div>
-                            </div>
-                            {
-                               errors1? <div className="col-sm-12 form-elem">
-                               <p style={{color:"white"}}>
-                                   {errors1}
-                                   </p>
-                               </div>  :<></>
-                            }
-                            
-                            </form>
-                        </div>
-                        
-<br/><br/><br/>
+                
                         <h4>Can’t find what your looking for? Please use the form below to contact us.
                         </h4>
                         <p>
@@ -340,101 +270,161 @@ export default function Quote() {
                             </div>
                         )}
 
-                        <form onSubmit={handleSubmit2} className="reply-form form-inline">
+                        <form onSubmit={handleSubmit} className="reply-form form-inline">
 
                             <div className="row form-elem">
                                 <br />
-                                <div className="col-sm-12 form-elem">
-
-                                    <u><h4>Your Detail</h4></u>
-                                </div>
+                               
                                 {/* LEFT SIDE */}
                                 <div className="col-sm-6 form-elem">
-
+                                <label>Your Detail</label>
                                     <div className="default-inp form-elem">
                                         <i className="fa fa-user"></i>
-                                        <input type="text" value={form2Data.firstName} name="firstName" onChange={handleChange2} placeholder="First Name" />
+                                        <input type="text" value={formData.fullName} name="fullName" onChange={handleChange} placeholder="Full Name" />
                                     </div>
                                     <div className="default-inp form-elem">
-                                        <i className="fa fa-user"></i>
-                                        <input type="text" name="lastName" value={form2Data.lastName} onChange={handleChange2} placeholder="Last Name" />
-                                    </div>
-
-
-                                </div>
-
-                                {/* RIGHT SIDE */}
-                                <div className="col-sm-6 form-elem">
-
-                                    <div className="default-inp form-elem">
-                                        <i className="fa fa-envelope"></i>
-                                        <input type="text" name="email" value={form2Data.email} onChange={handleChange2} placeholder="Email Address" />
+                                        <i className="fa fa-building"></i>
+                                        <input type="text" name="companyName" value={formData.companyName} onChange={handleChange} placeholder="Company Name" />
                                     </div>
                                     <div className="default-inp form-elem">
                                         <i className="fa fa-phone"></i>
-                                        <input type="text" name="contact" value={form2Data.contact} onChange={handleChange2} placeholder="Phone No." />
+                                        <input type="text" name="phoneNumber" value={formData.phoneNumber} onChange={handleChange} placeholder="Phone Number" />
                                     </div>
+                                    <div className="default-inp form-elem">
+                                        <i className="fa fa-envelope"></i>
+                                        <input type="text" name="emailAddress" value={formData.emailAddress} onChange={handleChange} placeholder="Email Address" />
+                                    </div>
+                                   
+                                    <br/><br/>
+                                <label htmlFor="collectionDate">Collection Date</label>
+                                    <div className="default-inp form-elem">
+                                    <input
+                                        type="date"
+                                        name="collectionDate"
+                                        value={formData.collectionDate}
+                                        onChange={handleChange}
+                                        onClick={(e) => {
+                                            const input = e.currentTarget;
+                                            if (input.showPicker) {
+                                                input.showPicker();
+                                            }
+                                        }}
+                                    />
                                 </div>
+                                <div className="default-inp form-elem">
+                                    <i className="fa fa-clock-o"></i>
+                                    <input type="text" name="collectionTime" value={formData.collectionTime} onChange={handleChange} placeholder="Collection Time" />
+                                </div>
+                                <div className="default-inp form-elem">
+                                    <i className="fa fa-map-marker"></i>
+                                    <input type="text" name="collectionPostCode" value={formData.collectionPostCode} 
+                                    onChange={handlePostcodeChange} placeholder="Collection Postcode" />
+                                    {suggestions.length > 0 && (
+                                        <ul className="postcode-dropdown">
+                                            {suggestions.map((item) => (
+                                                <li
+                                                    key={item}
+                                                    onClick={() => {
+                                                        setFormData((prev) => ({
+                                                            ...prev,
+                                                            collectionPostCode: item,
+                                                        }));
+                                                        setSuggestions([]);
+                                                    }}
+                                                >
+                                                    {item}
+                                                </li>
+                                            ))}
+                                        </ul>
+                                    )}
+                                </div>
+                                
+<br/><br/>
+                                <label htmlFor="deliveryDate">Delivery Date</label>
+                                <div className="default-inp form-elem">
+                                    <input
+                                        type="date"
+                                        name="deliveryDate"
+                                        value={formData.deliveryDate}
+                                        onChange={handleChange}
+                                        onClick={(e) => {
+                                            const input = e.currentTarget;
+                                            if (input.showPicker) {
+                                                input.showPicker();
+                                            }
+                                        }}
+                                    />
+                                </div>
+                                <div className="default-inp form-elem">
+                                    <i className="fa fa-clock-o"></i>
+                                    <input type="text" name="deliveryTime" value={formData.deliveryTime} onChange={handleChange} placeholder="Delivery Time" />
+                                </div>
+                                <div className="default-inp form-elem">
+                                    <i className="fa fa-map-marker"></i>
+                                    <input type="text" 
+                                    name="deliveryPostCode" 
+                                    value={formData.deliveryPostCode} 
+                                    onChange={handleDelPostcodeChange}
+                                    placeholder="Delivery Postcode" />
+                                    {delPostcode.length > 0 && (
+                                        <ul className="postcode-dropdown">
+                                            {delPostcode.map((item) => (
+                                                <li
+                                                    key={item}
+                                                    onClick={() => {
+                                                        setFormData((prev) => ({
+                                                            ...prev,
+                                                            deliveryPostCode: item,
+                                                        }));
+                                                        setDelPostcode([]);
+                                                    }}
+                                                >
+                                                    {item}
+                                                </li>
+                                            ))}
+                                        </ul>
+                                    )}
+                                </div>
+                              
                             </div>
 
-                            <div className="row form-elem">
-                                <br />
-                                <div className="col-sm-12 form-elem">
-                                    <u><h4>Collection Address</h4></u>
-                                </div>
-                                <div className="col-sm-12 form-elem">
+                            {/* RIGHT SIDE */}
+                            <div className="col-sm-6 form-elem">
 
-                                    <div className="default-inp form-elem">
-                                        <i className="fa fa-building"></i>
-                                        <input type="text" name="collectionAddress" value={form2Data.collectionAddress} onChange={handleChange2} placeholder="Building Name/Number" />
-                                    </div>
-                                    <div className="default-inp form-elem">
-                                        <i className="fa fa-map-marker"></i>
-                                        <input type="text" name="collectionPostCode" value={form2Data.collectionPostCode} onChange={handleChange2} placeholder="Postcode" />
-                                    </div>
-                                    <div className="form-elem default-inp ">
-                                        <textarea
-                                            name="collectionInstructions"
-                                            value={form2Data.collectionInstructions}
-                                            onChange={handleChange2}
-                                            placeholder="Further Instructions"
-                                        ></textarea>
-                                    </div>
+                                <label>Items(s) Detail</label>
+                                <div className="default-inp form-elem">
+                                <i className="fa fa-arrows-alt"></i>
+                                
+                                    <input type="text" name="approxSize" value={formData.approxSize} onChange={handleChange} placeholder="Approximate Size" />
                                 </div>
-                            </div>
-                            {/* CONTACT SECTION */}
-                            <div className="row form-elem">
-                                <br />
-                                <div className="col-sm-12 form-elem">
-                                    <u> <h4>Delivery Address</h4></u>
+                                <div className="default-inp form-elem">
+                                    <i className="fa fa-balance-scale"></i>
+                                    <input type="text" name="approxWeight" value={formData.approxWeight} onChange={handleChange} placeholder="Approximate Weight" />
                                 </div>
-                                <div className="col-sm-12 form-elem">
-
-                                    <div className="default-inp form-elem">
-                                        <i className="fa fa-building"></i>
-                                        <input type="text" name="deliveryAddress" value={form2Data.deliveryAddress} onChange={handleChange2} placeholder="Building Name/Number" />
-                                    </div>
-                                    <div className="default-inp form-elem">
-                                        <i className="fa fa-map-marker"></i>
-                                        <input type="text" name="deliveryPostCode" value={form2Data.deliveryPostCode} onChange={handleChange2} placeholder="Postcode" />
-                                    </div>
+                                <div className="default-inp form-elem">
                                     <div className="form-elem default-inp">
-                                        <textarea
-                                            name="deliveryInstructions"
-                                            value={form2Data.deliveryInstructions}
-                                            onChange={handleChange2}
-                                            placeholder="Further Instructions"
-                                        ></textarea>
+                                        <textarea name="itemDescription" value={formData.itemDescription} onChange={handleChange} placeholder="Item Description" />
                                     </div>
                                 </div>
+                                
+                                <div className="default-inp form-elem">
+                                    <div className="form-elem default-inp">
+                                        <textarea name="additionalNotes" value={formData.additionalNotes} onChange={handleChange} placeholder="Additional Notes" />
+                                    </div>
+                                </div>
+                                <br/>
+                                <label>Vehicle(s) Detail </label>
+                                <div className="default-inp form-elem">
+                                    <textarea name="vehicleRequired" value={formData.vehicleRequired} onChange={handleChange} placeholder="Required Vehicle" />
+                                </div>
                             </div>
-                            <p style={{ color: "red" }}>
-                            {errors}
-                        </p>
+                        </div>
 
-                            {/* SUBMIT */}
-                            <div className="form-elem">
-                                <button
+
+                        {/* SUBMIT */}
+                        <div className="form-elem" >
+                            <button
+                                style={{width:"100%"}}
                                     type="submit"
                                     className="btn btn-success btn-default"
                                     disabled={loading}
@@ -442,7 +432,11 @@ export default function Quote() {
                                     {loading ? "Submitting..." : "Get Quote"}
                                 </button>
                             </div>
-
+                            <div className="form-elem" >
+                            <p style={{ color: "red" }}>
+                            {errors}
+                        </p>
+                        </div>
                         </form>
 
                     </div>

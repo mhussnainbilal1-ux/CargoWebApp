@@ -2,6 +2,7 @@
 import emailjs from "@emailjs/browser";
 import { useState } from "react";
 import toast from "react-hot-toast";
+import Swal from "sweetalert2";
 export const Contact = () => {
     const [loading, setLoading] = useState(false);
     const [progress, setProgress] = useState(0);
@@ -76,7 +77,14 @@ export const Contact = () => {
             setProgress(100);
     
             toast.success("Message sent successfully!");
-    
+            Swal.fire({
+                icon: "success",
+                title: "Request Submitted!",
+                text: "Thank you! We've received your enquiry and will contact you shortly.",
+                confirmButtonText: "OK",
+                confirmButtonColor: "#16a34a",
+                background: "#fff",
+              });
             setTimeout(() => {
                 form.reset();
                 setErrors("");
