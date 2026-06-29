@@ -40,7 +40,7 @@ export const Slider = () => {
   ];
 
   return (
-    <div id="owl-main-slider" style={{ height:bigScreen?"600px":"200px"}} className="owl-carousel enable-owl-carousel owl-theme">
+    <div id="owl-main-slider" style={{ height:bigScreen?"600px":"200px"}} className="owl-carousel enable-owl-carousel owl-theme wow fadeInLeft" data-wow-delay="0.3s">
       
       <Swiper
         modules={[Navigation, Autoplay]}
