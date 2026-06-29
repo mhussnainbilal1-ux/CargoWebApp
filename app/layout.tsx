@@ -4,8 +4,8 @@ import { Footer } from "./component/Footer";
 import { Toaster } from "react-hot-toast";
 
 export const metadata = {
-  title: "Trans Cargo",
-  description: "Cargo logistics website",
+  title: "BROAD PEAK GROUP LTD",
+  description: "Cargo logistics",
 };
 
 export default function RootLayout({ children }: any) {
