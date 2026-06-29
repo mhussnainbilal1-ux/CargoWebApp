@@ -8,9 +8,9 @@ export const Content = () => {
         <Slider/>
             <div className="container-fluid">
                 <div className="row column-info block-content">
-                    <div className="col-sm-4 col-md-4 col-lg-4 wow fadeInLeft" data-wow-delay="3.3s" style={{
+                    <div className="col-sm-4 col-md-4 col-lg-4 wow fadeInLeft" data-wow-delay="0.3s" style={{
                         visibility: "visible",
-                        animationDelay: "1.3s",
+                        animationDelay: "0.3s",
                         animationName: "fadeInLeft",
                     }}>
                         <img src="media/vancard/vancard1.jpeg" alt="slider" />
@@ -18,9 +18,9 @@ export const Content = () => {
                         <h3>SAME DAY DELIVERY</h3>
                         <p>Fast and reliable same-day delivery across the UK.</p>
                     </div>
-                    <div className="col-sm-4 col-md-4 col-lg-4 wow fadeInUp" data-wow-delay="3.3s" style={{
+                    <div className="col-sm-4 col-md-4 col-lg-4 wow fadeInUp" data-wow-delay="0.3s" style={{
                         visibility: "visible",
-                        animationDelay: "1.3s",
+                        animationDelay: "0.3s",
                         animationName: "fadeInUp",
                     }}>
                         <img src="media/vancard/vancard2.jpeg" alt="Img" />
@@ -28,9 +28,9 @@ export const Content = () => {
                         <h3>DEDICATED TRANSPORT</h3>
                         <p>Your own vehicle, direct to destination, every time.</p>
                     </div>
-                    <div className="col-sm-4 col-md-4 col-lg-4 wow fadeInRight" data-wow-delay="3.3s" style={{
+                    <div className="col-sm-4 col-md-4 col-lg-4 wow fadeInRight" data-wow-delay="0.3s" style={{
                         visibility: "visible",
-                        animationDelay: "1.3s",
+                        animationDelay: "0.3s",
                         animationName: "fadeInRight",
                     }}>
                         <img src="media/vancard/vancard3.jpeg" alt="Img" />
