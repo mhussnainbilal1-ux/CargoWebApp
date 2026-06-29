@@ -41,13 +41,13 @@ const [bigScreen,setBigScreen]= useState(false);
 					}
 					
 					<div className="row header">
-					<div className="col-sm-3 col-md-3 col-lg-3" style={{marginTop:`${logoMargin}px`}}>
+					<div className={bigScreen ?"col-sm-3 col-md-3 col-lg-3":""} style={{marginTop:`${logoMargin}px`, marginBottom:bigScreen?"0px":"-60px"}}>
 						
 								<Image
 									src="/logo2.png"
 									alt="Logo"
-									width={200}
-									height={100}
+									width={bigScreen?200:100}
+									height={bigScreen?100:50}
 									priority
 								/>
 						</div>
@@ -55,8 +55,8 @@ const [bigScreen,setBigScreen]= useState(false);
 							bigScreen ?
 								<div className="col-sm-offset-1 col-md-offset-1 col-lg-offset-1 col-sm-8 col-md-8 col-lg-8">
 									<div className="text-right header-padding">
-										<div className="h-block"><span>CALL US</span>1.800.987.6543</div>
-										<div className="h-block"><span>EMAIL US</span>info@domain.com</div>
+										<div className="h-block"><span>CALL US</span>+44 20 7946 0958</div>
+										<div className="h-block"><span>EMAIL US</span>info@broadpeakgroup.co.uk</div>
 										<div className="h-block"><span>WORKING HOURS</span>Mon - Sat  8.00 - 19.00</div>
 										<a className="btn btn-success" href="/quote">GET A FREE QUOTE</a>
 									</div>

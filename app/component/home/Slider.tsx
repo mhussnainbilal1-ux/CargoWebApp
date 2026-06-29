@@ -5,21 +5,42 @@ import { Navigation, Autoplay } from "swiper/modules";
 
 import "swiper/css";
 import "swiper/css/navigation";
+import { useEffect, useState } from "react";
 
 export const Slider = () => {
+  const [bigScreen,setBigScreen]= useState(false);
+  useEffect(()=>{
+		if (window.innerWidth > 768) {
+			setBigScreen(true);
+		}
+		if (window.innerWidth <= 768) {
+			setBigScreen(false);
+		}
+	},[])
+  
   const slides = [
+    // {
+    //   image: "/media/main-slider/side1.jpeg",
+    // },
     {
-      image: "/media/main-slider/1.jpg",
-      title: "Same Day Courier & Van Logistics UK | Broad Peak Group Ltd",
+      image: "/media/main-slider/slide2.jpeg",
     },
     {
-      image: "/media/main-slider/2.jpg",
-      title: "Same Day Courier & Van Logistics UK | Broad Peak Group Ltd",
+      image: "/media/main-slider/slide3.jpeg",
+    },
+    {
+      image: "/media/main-slider/slide4.jpeg",
+    },
+    {
+      image: "/media/main-slider/slide5.jpeg",
+    }, 
+    {
+      image: "/media/main-slider/slide6.jpeg",
     },
   ];
 
   return (
-    <div id="owl-main-slider" className="owl-carousel enable-owl-carousel owl-theme">
+    <div id="owl-main-slider" style={{ height:bigScreen?"600px":"200px"}} className="owl-carousel enable-owl-carousel owl-theme">
       
       <Swiper
         modules={[Navigation, Autoplay]}
@@ -30,17 +51,18 @@ export const Slider = () => {
         autoplay={{ delay: 4000 }}
         speed={1200}  
         loop
+       
       >
         {slides.map((slide, i) => (
           <SwiperSlide key={i}>
             <div
               className="item"
-              style={{ backgroundImage: `url(${slide.image})` }}
+              style={{ backgroundImage: `url(${slide.image})`, height:bigScreen?"600px":"200px" }}
             >
               <div className="container-fluid">
                 <div className="slider-content col-md-7 col-lg-7">
                   
-                  <div style={{ display: "table" }}>
+                  {/* <div style={{ display: "table" }}>
                     
                     <div
                       style={{
@@ -57,19 +79,11 @@ export const Slider = () => {
                       </a>
                     </div>
 
-                    <div style={{ display: "table-cell" }}>
-                      <h1>{slide.title}</h1>
-                    </div>
+                   
 
                   </div>
 
-                  <p>
-                  Reliable Same Day Courier & Van Logistics Across the UK
-                    <br />
-                    <a className="btn btn-success" href="/quote">
-                      Get a Quote
-                    </a>
-                  </p>
+                 */}
 
                 </div>
               </div>

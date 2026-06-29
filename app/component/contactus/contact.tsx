@@ -108,7 +108,7 @@ export const Contact = () => {
             <div className="bg-image page-title">
                 <div className="container-fluid">
                     <a href="#">
-                        <h1>road transportation</h1>
+                        <h1>Contact us</h1>
                     </a>
 
                     <div className="pull-right">
@@ -127,27 +127,26 @@ export const Contact = () => {
                     <div className="col-sm-4">
                         <h4>Head Office</h4>
                         <p>
-                            Everyday is a new day for us and we work really hard to satisfy our customers everywhere.
-                        </p>
+                        We are always here to help and answer any questions you may have about our services.                        </p>
 
                         <div className="adress-details wow fadeInLeft">
                             <div>
                                 <span><i className="fa fa-location-arrow"></i></span>
                                 <div>
-                                    <strong>TRANSCARGO LTD.</strong>
+                                    <strong>BROAD PEAK GROUP LTD.</strong>
                                     <br />
-                                    3608 NewHill Station Ave CA, Newyork 33102
+                                    71-75 Shelton Street, Covent Garden, London, WC2H 9JQ, United Kingdom.
                                 </div>
                             </div>
 
                             <div>
                                 <span><i className="fa fa-phone"></i></span>
-                                <div>1.800.987.6543</div>
+                                <div>+44 20 7946 0958</div>
                             </div>
 
                             <div>
                                 <span><i className="fa fa-envelope"></i></span>
-                                <div>quote@domain.com</div>
+                                <div>info@broadpeakgroup.co.uk</div>
                             </div>
 
                             <div>
@@ -164,20 +163,20 @@ export const Contact = () => {
                             <div>
                                 <span><i className="fa fa-location-arrow"></i></span>
                                 <div>
-                                    <strong>TRANSCARGO LTD.</strong>
+                                    <strong>BROAD PEAK GROUP LTD.</strong>
                                     <br />
-                                    3608 NewHill Station Ave CA, Newyork 33102
+                                     Unit 4, Omega Business Park, Northampton Road, Manchester, M40 5BP, United Kingdom.
                                 </div>
                             </div>
 
                             <div>
                                 <span><i className="fa fa-phone"></i></span>
-                                <div>1.800.987.6543</div>
+                                <div>+44 161 820 0970</div>
                             </div>
 
                             <div>
                                 <span><i className="fa fa-envelope"></i></span>
-                                <div>quote@domain.com</div>
+                                <div>manchester@broadpeakgroup.co.uk</div>
                             </div>
 
                             <div>
@@ -191,11 +190,8 @@ export const Contact = () => {
                         <h4>SEND us a message</h4>
 
                         <p>
-                            Integer congue elit noin semper laoreet sed lectus orcil posuer nisal tempor se felis acm.
-                        </p>
-                        <p style={{color:"red"}}>
-                        {errors}                      
-                          </p>
+                        SEND US A MESSAGE - Fill out the form below and our team will get back to you as soon as possible.                        </p>
+                       
                        
                         {loading && (
                             <div style={{
@@ -253,7 +249,9 @@ export const Contact = () => {
                             <div className="form-elem default-inp">
                                 <textarea name="user-message" placeholder="Message"></textarea>
                             </div>
-
+                            <p style={{color:"red"}}>
+                        {errors}                      
+                          </p>
                             <div className="form-elem">
                                 <button
                                     type="submit"
