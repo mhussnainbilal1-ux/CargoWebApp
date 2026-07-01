@@ -125,9 +125,9 @@ const handlePostcodeChange = async (
         } else if (!deliveryDate) {
             setErrors("Delivery date is required"); return;
         }
-        else if (!itemDescription) {
-            setErrors("Item description is required"); return;
-        }
+        // else if (!itemDescription) {
+        //     setErrors("Item description is required"); return;
+        // }
         else if (!approxSize) {
             setErrors("Size is required"); return;
         }
@@ -445,67 +445,8 @@ const handlePostcodeChange = async (
             <br />
             <br />
             <div className="block-content inner-offset" style={{marginBottom:"-50px"}}>
-            <div
-                className="big-hr color-2 wow zoomInUp"
-                data-wow-delay="0.3s"
-                style={{
-                    visibility: "visible",
-                    animationDelay: "0.3s",
-                    animationName: "zoomInUp",
-                }}
-            >
-                <div
-                    className="text-left"
-                    style={{ marginRight: "40px" }}
-                >
-                    <h2>WE PROVIDE FASTEST &amp; AFFORDABLE CARGO SERVICES</h2>
-                    <p>
-                        Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-                        tempor incididunt
-                    </p>
-                </div>
-
-                {/* <div>
-                    <a className="btn btn-danger btn-lg" href="#">
-                        REQUEST A FREE QUOTE
-                    </a>
-                </div> */}
-            </div>
-  <div
-    className="info-texts wow fadeIn"
-    data-wow-delay="0.3s"
-    style={{
-      visibility: "visible",
-      animationDelay: "0.3s",
-      animationName: "fadeIn",
-    }}
-  >
-    <div className="container-fluid">
-      <div className="row">
-        <div className="col-sm-4 col-md-4 col-lg-4">
-          <p>
-            We have wide network of offices in all major locations to help you
-            with the services we offer
-          </p>
-        </div>
-
-        <div className="col-sm-4 col-md-4 col-lg-4">
-          <p>
-            With the help of our worldwide partners we are providing
-            specialized services in Logistics solutions to our satisfied
-            customers
-          </p>
-        </div>
-
-        <div className="col-sm-4 col-md-4 col-lg-4">
-          <p>
-            We provides comprehensive cargo care, cargo movement &amp; project
-            management
-          </p>
-        </div>
-      </div>
-    </div>
-  </div>
+          
+ 
 </div>
           
         </>

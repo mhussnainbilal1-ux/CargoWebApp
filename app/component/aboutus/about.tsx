@@ -27,8 +27,9 @@ export const About = () => {
                         animationName: "zoomIn",
                     }}
                 >
-                    <h2>FOR ALL YOUR CARGO NEEDS</h2>
-                    <h1>TRANSCARGO - THE RIGHT CHOICE</h1>
+                    <h2>
+                        FOR ALL YOUR COURIER & LOGISTICS NEEDS</h2>
+                    <h1>BROAD PEAK GROUP LTD — THE RIGHT CHOICE</h1>
                 </div>
 
                 <ul
@@ -48,12 +49,13 @@ export const About = () => {
                     </li>
                     <li>
                         <a href="#tab2" data-toggle="tab">
-                            THE MISSION
+                        OUR MISSION
                         </a>
                     </li>
                     <li>
                         <a href="#tab3" data-toggle="tab">
-                            OUR STRATEGY
+                        OUR VALUES
+
                         </a>
                     </li>
                 </ul>
@@ -75,21 +77,16 @@ export const About = () => {
                             <div className="col-sm-7">
                                 <p>
                                     <strong style={{ fontSize: "16px" }}>
-                                        Sed mollis lorem ipsum dolor sit amet, consectetuer adipiscing
-                                        elit vamus fringilla sed cipit mil sed hac habitasse platea
-                                        dictumst pellentesque justo.
+                                    Broad Peak Group Ltd is a UK-based courier and logistics company based in Luton, providing same-day courier, dedicated van transport, pallet delivery, scheduled delivery, final mile delivery, small parcel delivery, warehouse storage, and business logistics support across the UK.
                                     </strong>
                                 </p>
                                 <p>
-                                    Vivamus quis sapien. Etiam fring illatul Quisque consectetuer.
-                                    Integer conguel elit non semper laoreet sed lectus orcid posuere
-                                    nisl tempor lacus felis ac mauris. Pellentesque inedu urna. Integer
-                                    lvitae felis. Vel magna posuere vestibulum. Nam rutrum congue diam.
+                                We focus on reliable collections, safe handling, clear communication, and professional delivery from start to finish.
                                 </p>
-                                <u>
+                                {/* <u>
                                     Aliquam malesuada mauris urk metus lorem ipsum dolor sit amet
                                     consectetur adipisicing
-                                </u>
+                                </u> */}
                             </div>
                         </div>
                     </div>
@@ -102,22 +99,13 @@ export const About = () => {
                             <div className="col-sm-7 text-block">
                                 <p>
                                     <strong>
-                                        Aliquam malesuada mauris urk metus lorem ipsum dolor sit amet
-                                        consectetur adipisicingSed mollis lorem ipsum dolor sit amet,
-                                        consectetuer adipiscing elit vamus fringilla sed cipit mil sed
-                                        hac habitasse platea dictumst pellentesque justo.
+                                    Our mission is to provide dependable, professional, and affordable courier and logistics services that help businesses move goods with confidence.
                                     </strong>
                                 </p>
                                 <p>
-                                    Vivamus quis sapien. Etiam fring illatul Quisque consectetuer.
-                                    Integer conguel elit non semper laoreet sed lectus orcid posuere
-                                    nisl tempor lacus felis ac mauris. Vel magna posuere vestibulum. Nam
-                                    rutrum congue diam.
+                                Whether it is an urgent parcel, pallet delivery, dedicated van load, or regular business transport, we aim to make every delivery smooth, secure, and on time.
                                 </p>
-                                <u>
-                                    Aliquam malesuada mauris urk metus lorem ipsum dolor sit amet
-                                    consectetur adipisicing
-                                </u>
+                                
                             </div>
                         </div>
                     </div>
@@ -130,70 +118,19 @@ export const About = () => {
                             <div className="col-sm-7 text-block">
                                 <p>
                                     <strong>
-                                        Vel magna posuere vestibulum. Nam rutrum congue diam.
+                                    We believe in reliability, professionalism, clear communication, and customer care.
                                     </strong>
                                 </p>
                                 <p>
-                                    Vivamus quis sapien. Etiam fring illatul Quisque consectetuer.
-                                    Integer conguel elit non semper laoreet sed lectus orcid posuere
-                                    nisl tempor lacus felis ac mauris.Vel magna posuere vestibulum. Nam
-                                    rutrum congue diam. Pellentesque inedu urna. Integer lvitae felis.
-                                    Vel magna posuere vestibulum. Nam rutrum congue diam.
+                                Every delivery is handled with attention, respect, and a commitment to meeting customer expectations.
                                 </p>
-                                <u>
-                                    Aliquam malesuada mauris urk metus lorem ipsum dolor sit amet
-                                    consectetur adipisicing
-                                </u>
+                               
                             </div>
                         </div>
                     </div>
                 </div>
 
-                <div className="row stats percent-blocks" data-waypoint-scroll="true">
-                    <div className="col-sm-6 col-md-3">
-                        <div className="chart" data-percent="230">
-                            <span>
-                                <i className="fa fa-folder-open"></i>
-                            </span>
-                            <span className="percent">230</span>
-                            Projects Done
-                            <canvas height="0" width="0"></canvas>
-                        </div>
-                    </div>
-
-                    <div className="col-sm-6 col-md-3">
-                        <div className="chart" data-percent="68">
-                            <span>
-                                <i className="fa fa-users"></i>
-                            </span>
-                            <span className="percent">68</span>
-                            Clients Worldwide
-                            <canvas height="0" width="0"></canvas>
-                        </div>
-                    </div>
-
-                    <div className="col-sm-6 col-md-3">
-                        <div className="chart" data-percent="147">
-                            <span>
-                                <i className="fa fa-truck"></i>
-                            </span>
-                            <span className="percent">147</span>
-                            Owned Vehicles
-                            <canvas height="0" width="0"></canvas>
-                        </div>
-                    </div>
-
-                    <div className="col-sm-6 col-md-3">
-                        <div className="chart" data-percent="105">
-                            <span>
-                                <i className="fa fa-male"></i>
-                            </span>
-                            <span className="percent">105</span>
-                            People In Team
-                            <canvas height="0" width="0"></canvas>
-                        </div>
-                    </div>
-                </div>
+             
             </div>
 
 
@@ -213,15 +150,15 @@ export const About = () => {
                     }}
                 >
                     <h1>
-                        WE ARE DEDICATED TO PROVIDE THE BEST SERVICE <br /> AT THE LOWEST
-                        POSSIBLE COST
+                    RELIABLE COURIER & LOGISTICS SUPPORT ACROSS THE UK
                     </h1>
 
                    
                 </div>
             </div>
 
-            <div className="container-fluid block-content inner-offset">
+           
+            {/* <div className="container-fluid block-content inner-offset">
                 <div
                     className="hgroup text-center wow fadeInUp"
                     data-wow-delay="0.3s"
@@ -231,8 +168,8 @@ export const About = () => {
                         animationName: "fadeInUp",
                     }}
                 >
-                    <h1>MEET OUR TEAM</h1>
-                    <h2>dedicated & professionals</h2>
+                    <h1>OUR TEAM</h1>
+                    <h2>PROFESSIONAL, RELIABLE & CUSTOMER FOCUSED</h2>
                 </div>
 
                 <div className="row main-grid team hover-eff">
@@ -517,7 +454,7 @@ export const About = () => {
                         </div>
                     </div>
                 </div>
-            </div>
+            </div> */}
         </>
     )
 }
